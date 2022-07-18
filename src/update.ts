@@ -1,12 +1,12 @@
 import { pressedKeys } from "./controls.js";
 import { message } from "./ws_utils.js";
-import { socket } from "./game_init.js";
 import { gameCanvas } from "./elements.js";
+import { socket } from "./game.js";
 
 let prevTime = 0;
 
-export function update(time = 0) {
-    requestAnimationFrame(update);
+export function update(time = 0, socket: WebSocket) {
+    requestAnimationFrame(t => update(t, socket));
 
     const dt = time - prevTime;
     prevTime = time;

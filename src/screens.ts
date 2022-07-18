@@ -11,7 +11,9 @@ import { fadeIn, fadeOut } from "./animations.js";
 gotoMainMenuScreen();
 
 mainMenuStartButton.addEventListener("click", gotoGameScreen);
-gameBackButton.addEventListener("click", gotoMainMenuScreen);
+gameBackButton.addEventListener("click", () => {
+    gotoMainMenuScreen();
+});
 
 function gotoMainMenuScreen() {
     const gameScreenFadeOutAnimation = gameScreen.animate(
@@ -56,8 +58,8 @@ function gotoGameScreen() {
 
         localStorage.name = mainMenuNameInput.value;
 
-        const gameInitImport = await import("./game_init.js");
-        gameInitImport.init(mainMenuNameInput.value);
+        const { init } = await import("./game.js");
+        init(mainMenuNameInput.value);
         mainMenuNameInput.value = "";
     });
 }

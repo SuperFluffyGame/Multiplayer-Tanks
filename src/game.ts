@@ -6,8 +6,8 @@ const url = new URL(window.location.href);
 // const ws_url = (url.protocol = "ws");
 url.protocol = "ws";
 url.port = "3001";
-export const socket = new WebSocket(url.href);
 
+export const socket = new WebSocket(url.href);
 export let id: string;
 
 export function init(name: string) {
@@ -25,8 +25,7 @@ export function init(name: string) {
         // RENDER
         render();
         // UPDATE
-        update();
-        console.log("connected");
+        update(0, socket);
     });
 
     socket.addEventListener("message", async msg => {

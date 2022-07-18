@@ -8,8 +8,21 @@
     height: 400px;
 }
 
-#game-lb > tbody > tr > td:nth-child(1) {
+#game-lb {
+    border-collapse: collapse;
+}
+
+#game-lb tbody tr td:nth-child(1) {
+    padding-right: 1rem;
     text-align: left;
+}
+#game-lb tbody tr td,
+#game-lb tbody tr th {
+    padding: 0.25rem;
+    border: 1px solid #666;
+}
+#game-lb tbody tr th {
+    font-size: 1.25em;
 }
 
 #game-lb {

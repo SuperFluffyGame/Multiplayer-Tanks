@@ -1,4 +1,4 @@
-import { id } from "./game_init.js";
+import { id } from "./game.js";
 import { Data, Tank } from "./data.js";
 import { gameCanvas as canvas, gameLB as leaderboard } from "./elements.js";
 
@@ -98,9 +98,9 @@ function setLeaderBoardData(tanks: Tank[]) {
     for (let i = 0; i < tanks.length; i++) {
         const tank = tanks[i];
 
-        let row = leaderboard.rows[i];
+        let row = leaderboard.rows[i + 1];
         if (!row) {
-            row = leaderboard.insertRow(i);
+            row = leaderboard.insertRow(i + 1);
         }
 
         let nameCell = row.cells[0];
