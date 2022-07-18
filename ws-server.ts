@@ -3,7 +3,9 @@ import { Tank, Data, Bullet, getTankFromId } from "./src/data";
 
 const server = new ws.Server({ port: 3001 });
 
-const data: Data = { BULLETS: [], TANKS: [] };
+const connectionData = {};
+
+const gameData: Data = { BULLETS: [], TANKS: [] };
 
 const sockets: {
     id: string;
@@ -11,12 +13,10 @@ const sockets: {
 }[] = [];
 
 server.on("connection", socket => {
-    console.log("connection");
-
     socket.on("close", () => {
         const index = sockets.findIndex(s => s.socket === socket);
         if (index !== -1) {
-            const tank = getTankFromId(data, sockets[index].id);
+            const tank = getTankFromId(gameData, sockets[index].id);
             if (tank) {
                 tank.status = "Offline";
             }
@@ -44,7 +44,7 @@ server.on("connection", socket => {
                     socket,
                 });
 
-                let tank = getTankFromId(data, parsed.data);
+                let tank = getTankFromId(gameData, parsed.data);
                 if (tank) {
                     tank.status = "Online";
                 } else {
@@ -59,7 +59,7 @@ server.on("connection", socket => {
                         hits: 0,
                         status: "Online",
                     };
-                    data.TANKS.push(tank);
+                    gameData.TANKS.push(tank);
                 }
 
                 sendDataAll();
@@ -68,7 +68,7 @@ server.on("connection", socket => {
             case "move": {
                 const id = sockets.find(s => s.socket === socket)?.id;
                 if (!id) break;
-                const tank = getTankFromId(data, id);
+                const tank = getTankFromId(gameData, id);
                 if (!tank) break;
                 let { x, y } = parsed.data;
 
@@ -90,7 +90,7 @@ server.on("connection", socket => {
             case "fire": {
                 const id = sockets.find(s => s.socket === socket)?.id;
                 if (!id) break;
-                const tank = getTankFromId(data, id);
+                const tank = getTankFromId(gameData, id);
                 if (!tank) break;
 
                 const bullet: Bullet = {
@@ -108,7 +108,7 @@ server.on("connection", socket => {
                     angle: tank.angle,
                 };
 
-                data.BULLETS.push(bullet);
+                gameData.BULLETS.push(bullet);
 
                 sendDataAll();
 
@@ -117,7 +117,7 @@ server.on("connection", socket => {
             case "name": {
                 const id = sockets.find(s => s.socket === socket)?.id;
                 if (!id) break;
-                const tank = getTankFromId(data, id);
+                const tank = getTankFromId(gameData, id);
                 if (!tank) break;
                 tank.name = parsed.data;
                 sendDataAll();
@@ -132,7 +132,7 @@ function message(type: string, data: any) {
 }
 
 function sendData(socket: ws.WebSocket) {
-    socket.send(message("data", data));
+    socket.send(message("data", gameData));
 }
 
 function sendDataAll() {
@@ -142,23 +142,23 @@ function sendDataAll() {
 function update() {
     let changed = false;
 
-    for (const bullet of data.BULLETS) {
+    for (const bullet of gameData.BULLETS) {
         changed = true;
         bullet.pos.x -= Math.cos(bullet.angle + Math.PI / 2) * 5;
         bullet.pos.y -= Math.sin(bullet.angle + Math.PI / 2) * 5;
 
-        for (const tank of data.TANKS) {
+        for (const tank of gameData.TANKS) {
             if (
                 bullet.pos.x >= tank.pos.x &&
                 bullet.pos.x <= tank.pos.x + 25 &&
                 bullet.pos.y >= tank.pos.y &&
                 bullet.pos.y <= tank.pos.y + 25
             ) {
-                const sending_tank = getTankFromId(data, bullet.sender);
+                const sending_tank = getTankFromId(gameData, bullet.sender);
                 if (!sending_tank) continue;
                 if (tank.status === "Offline") continue;
                 sending_tank.hits++;
-                data.BULLETS.splice(data.BULLETS.indexOf(bullet), 1);
+                gameData.BULLETS.splice(gameData.BULLETS.indexOf(bullet), 1);
                 sendDataAll();
                 break;
             }
@@ -171,7 +171,7 @@ function update() {
             bullet.pos.y < 0 ||
             bullet.pos.y > 400
         ) {
-            data.BULLETS.splice(data.BULLETS.indexOf(bullet), 1);
+            gameData.BULLETS.splice(gameData.BULLETS.indexOf(bullet), 1);
         }
     }
     if (changed) sendDataAll();

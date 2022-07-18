@@ -1,4 +1,4 @@
-export const mainMenuScreen = document.getElementById(
+export const mainMenuScreenElement = document.getElementById(
     "main-menu"
 )! as HTMLDivElement;
 
@@ -13,7 +13,9 @@ export const mainMenuHelpButton = document.getElementById(
     "main-menu-button-help"
 )! as HTMLButtonElement;
 
-export const gameScreen = document.getElementById("game")! as HTMLDivElement;
+export const gameScreenElement = document.getElementById(
+    "game"
+)! as HTMLDivElement;
 export const gameCanvas = document.getElementById(
     "game-canvas"
 )! as HTMLCanvasElement;
