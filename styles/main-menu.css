@@ -1,0 +1,46 @@
+#main-menu-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10em;
+}
+
+#main-menu-title {
+    font-size: 2em;
+}
+
+#main-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 2.5rem;
+}
+
+#main-menu-buttons button {
+    margin-top: 1rem;
+
+    width: 40rem;
+    height: 5rem;
+
+    font-size: 2em;
+}
+
+#main-menu-name {
+    font-size: 1.5rem;
+
+    margin-top: 1rem;
+}
+
+#main-menu-name-input {
+    width: 20rem;
+    height: 3rem;
+
+    border: 1px solid #666;
+    background-color: #222;
+
+    text-align: center;
+
+    font-size: 1em;
+}

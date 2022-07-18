@@ -1,0 +1,28 @@
+#game-content {
+    text-align: center;
+    display: flex;
+}
+
+#game-canvas {
+    width: 800px;
+    height: 400px;
+}
+
+#game-lb > tbody > tr > td:nth-child(1) {
+    text-align: left;
+}
+
+#game-lb {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#game-button-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 5rem;
+    height: 2rem;
+}
