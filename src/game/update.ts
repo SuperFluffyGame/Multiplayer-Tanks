@@ -1,12 +1,11 @@
 import { pressedKeys } from "./controls.js";
-import { message } from "./ws_utils.js";
-import { gameCanvas } from "./elements.js";
-import { socket } from "./game.js";
+import { gameCanvas } from "../elements.js";
+import { sendFirePacket, sendMovePacket } from "./packets.js";
 
 let prevTime = 0;
 
-export function update(time = 0, socket: WebSocket) {
-    requestAnimationFrame(t => update(t, socket));
+export function update(time = 0) {
+    requestAnimationFrame(update);
 
     const dt = time - prevTime;
     prevTime = time;
@@ -39,11 +38,11 @@ export function update(time = 0, socket: WebSocket) {
     }
 
     if (len > 0) {
-        socket.send(message("move", normalized));
+        sendMovePacket(normalized);
     }
 }
 
 // FIRING
 gameCanvas.addEventListener("click", e => {
-    socket.send(message("fire", { x: e.clientX, y: e.clientY }));
+    sendFirePacket({ x: e.offsetX, y: e.offsetY });
 });

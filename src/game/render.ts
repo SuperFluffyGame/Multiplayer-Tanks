@@ -1,6 +1,6 @@
 import { id } from "./game.js";
 import { Data, Tank } from "./data.js";
-import { gameCanvas as canvas, gameLB as leaderboard } from "./elements.js";
+import { gameCanvas as canvas, gameLB as leaderboard } from "../elements.js";
 
 const context = canvas.getContext("2d")!;
 
@@ -59,7 +59,7 @@ export function render() {
     }
 }
 
-export function setData(data: typeof renderData) {
+export function setData(data: Data) {
     renderData = data;
 }
 

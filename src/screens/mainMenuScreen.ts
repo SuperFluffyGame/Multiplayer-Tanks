@@ -5,7 +5,7 @@ import {
     mainMenuStartButton,
 } from "../elements.js";
 import { Screen } from "./screen.js";
-import * as Animations from "../animations.js";
+import * as Animations from "./animations.js";
 import { gameScreen } from "./gameScreen.js";
 
 mainMenuNameInput.addEventListener("input", updateName);

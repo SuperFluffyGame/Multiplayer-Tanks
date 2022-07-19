@@ -4,7 +4,7 @@ import {
     gameBackButton,
 } from "../elements.js";
 import { Screen } from "./screen.js";
-import * as Animations from "../animations.js";
+import * as Animations from "./animations.js";
 import { mainMenuScreen } from "./mainMenuScreen.js";
 
 export const gameScreen = new Screen(gameScreenElement);
@@ -28,8 +28,7 @@ gameScreen.onShow(async elem => {
     elem.classList.remove("hidden");
     elem.animate(Animations.fadeIn.keyframes, Animations.fadeIn.timing);
 
-    const { init } = await import("../game.js");
-    init(localStorage.name);
+    const { setName } = await import("../game/game.js");
 });
 
 gameBackButton.addEventListener("click", () => {

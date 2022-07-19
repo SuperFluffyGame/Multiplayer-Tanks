@@ -9,10 +9,13 @@
         <link rel="stylesheet" href="./global.css" />
         <link rel="stylesheet" href="./main-menu.css" />
         <link rel="stylesheet" href="./game.css" />
+        <link rel="stylesheet" href="./toast.css" />
     </head>
     <body>
+        <div id="toast-container"></div>
+
         <!-- MAIN MENU SCREEN -->
-        <div id="main-menu" class="flex-screen">
+        <div id="main-menu" class="flex-screen hidden">
             <div id="main-menu-content">
                 <div id="main-menu-title">
                     <h1>MULTIPLAYER TANK GAME</h1>
@@ -36,7 +39,7 @@
         </div>
 
         <!-- GAME SCREEN -->
-        <div id="game" class="flex-screen">
+        <div id="game" class="flex-screen hidden">
             <div id="game-content">
                 <button id="game-button-back" class="button">Back</button>
                 <canvas id="game-canvas" width="800" height="400"></canvas>

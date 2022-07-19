@@ -1,0 +1,40 @@
+#toast-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-inline: 0.5rem;
+
+    bottom: 0;
+    right: 0;
+}
+
+.toast {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 20rem;
+
+    margin-block: 0.5rem;
+}
+
+.toast h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.toast p {
+    color: #fff;
+    padding-top: 0.25rem;
+}
+
+.error {
+    background-color: #be6d6d;
+}
+
+.warning {
+    background-color: #f9a825;
+}
+
+.success {
+    background-color: #8cc152;
+}

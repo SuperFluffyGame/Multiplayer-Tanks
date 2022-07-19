@@ -1,3 +1,7 @@
+export const toastContainer = document.getElementById(
+    "toast-container"
+) as HTMLDivElement;
+
 export const mainMenuScreenElement = document.getElementById(
     "main-menu"
 )! as HTMLDivElement;
