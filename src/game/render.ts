@@ -1,5 +1,5 @@
 import { id } from "./game.js";
-import { Data, Tank } from "./data.js";
+import { Data, Tank } from "./gameData.js";
 import { gameCanvas as canvas, gameLB as leaderboard } from "../elements.js";
 
 const context = canvas.getContext("2d")!;
